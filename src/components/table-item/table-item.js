@@ -13,23 +13,22 @@ export default class TableItem extends Component {
     handleChange = (event) => {
         const {name, value} = event.target;
         this.setState({[name]: value});
-    }
+    };
 
     editItem = () => {
         this.setState({isEditting: true});
-    }
+    };
 
     confirm = () => {
         const id = this.props.id;
         const inputValues = Object.assign({}, this.props, this.state);
-        console.log(this.props);
         this.props.updateItem(id, inputValues);
         this.setState({isEditting: false});
-    }
+    };
 
     cancel = () => {
         this.setState({isEditting: false});
-    }
+    };
 
     createInput = (initialValue, name, placeholder = "") => {
         const value = typeof this.state[name] === "undefined" ? initialValue : this.state[name];
@@ -42,7 +41,7 @@ export default class TableItem extends Component {
                    value={value}
                    name={name}/>
         );
-    }
+    };
 
     createButton = (onClick, type) => {
         const buttonType = {
@@ -59,7 +58,7 @@ export default class TableItem extends Component {
                 <i className={`fa ${buttonType[type]}`}/>
             </button>
         );
-    }
+    };
 
     render() {
         let { id, label, price, description, onDeleted } = this.props;

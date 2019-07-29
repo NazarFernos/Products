@@ -21,7 +21,7 @@ export default class App extends Component {
         ]
     };
 
-    createTableItem(label, price, description) {
+    createTableItem = (label, price, description) => {
         let tableData = this.state.tableData;
         let lastId = tableData[tableData.length-1].id;
         if (lastId < this.maxId)
@@ -33,7 +33,7 @@ export default class App extends Component {
             };
 
         return false;
-    }
+    };
 
     deleteItem = (id) => {
         this.setState(({ tableData }) => {
@@ -90,7 +90,7 @@ export default class App extends Component {
                 <Table
                     onDeleted = { this.deleteItem }
                     updateItem = { this.updateItem.bind(this) }
-                    tableItems={tableData}/>
+                    tableItems={tableData} />
             </div>
         );
     }
