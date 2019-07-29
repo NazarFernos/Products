@@ -1,18 +1,19 @@
 import React from 'react';
 
-import TodoListItem from '../todo-list-item/todo-list-item';
-import './todo-list.css';
+import TableItem from '../table-item/table-item';
+import './table.css';
 
-const TodoList = ({ todos, onDeleted }) => {
+const Table = ({ todos, onDeleted, updateItem }) => {
 
     const elements = todos.map((item) => {
         const { id, ...itemProps } = item;
 
         return (
             <div key={id} >
-                <TodoListItem {...itemProps }
+                <TableItem {...itemProps }
+                              id = {id}
                               onDeleted = {() => onDeleted(id)}
-                />
+                              updateItem = {updateItem} />
             </div>
 
         );
@@ -21,9 +22,10 @@ const TodoList = ({ todos, onDeleted }) => {
     return (
 
         <div className = "table">
-            <table>
+            <table className="table">
                 <thead>
                 <tr>
+                    <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Description</th>
@@ -35,4 +37,4 @@ const TodoList = ({ todos, onDeleted }) => {
     );
 };
 
-export default TodoList;
+export default Table;

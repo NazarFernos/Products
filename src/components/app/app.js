@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import TodoList from '../todo-list';
-import ItemAddForm from '../item-add-form';
+import Table from '../table';
+import TableAddRow from '../table-add-row';
 
 
 import './app.css';
@@ -13,7 +13,7 @@ export default class App extends Component {
     state = {
         todoData: [
             {
-                id: "", 
+                id: 1,
                 label: "",
                 price: "",
                 description: ""
@@ -23,12 +23,17 @@ export default class App extends Component {
     };
 
     createTodoItem(label, price, description) {
-        return {
-            label,
-            price,
-            description,
-            id: this.maxId++
-        }
+        let todoData = this.state.todoData;
+        let lastId = todoData[todoData.length-1].id;
+        if (lastId < this.maxId)
+            return {
+                label,
+                price,
+                description,
+                id: ++lastId
+            }
+
+        return false;
     }
 
     deleteItem = (id) => {
@@ -49,6 +54,8 @@ export default class App extends Component {
     addItem = (text, price, description) => {
         const newItem = this.createTodoItem(text, price, description);
 
+        if (!newItem) return
+
         this.setState(({ todoData }) => {
 
             const newArr = [
@@ -62,7 +69,14 @@ export default class App extends Component {
         });
     };
 
-
+    updateItem(targetId, inputValues) {
+        this.setState(({todoData}) => {
+            const targetIndex = todoData.findIndex((element) => element.id === targetId);
+            const newTodoData = [...todoData];
+            Object.assign(newTodoData[targetIndex], inputValues);
+            return newTodoData;
+        });
+    }
 
     render() {
 
@@ -71,12 +85,11 @@ export default class App extends Component {
 
         return (
             <div className="todo-app">
-                <TodoList
+                <TableAddRow addItem = {this.addItem} />
+                <Table
                     onDeleted = { this.deleteItem }
+                    updateItem = { this.updateItem.bind(this) }
                     todos={todoData}/>
-
-
-                <ItemAddForm addItem = {this.addItem} />
             </div>
         );
     }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import './item-add-form.css';
+import './table-add-row.css';
 
-export default class ItemAddForm extends Component {
+export default class TableAddRow extends Component {
 
     state = {
         label: "",
@@ -41,7 +41,7 @@ export default class ItemAddForm extends Component {
 
     render() {
         return (
-            <form className="item-add-form d-flex"
+            <form className="table-add-row d-flex"
                 onSubmit={this.onSubmit}>
 
                 <input type="text"
@@ -61,8 +61,8 @@ export default class ItemAddForm extends Component {
                        value={this.state.description}/>
 
                 <button
-                    className="btn btn-outline-secondary">
-                    Add Product
+                    className="btn btn-primary">
+                    Add product
                 </button>
             </form>
         )
