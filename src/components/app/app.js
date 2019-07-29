@@ -68,14 +68,15 @@ export default class App extends Component {
         });
     };
 
-    updateItem(targetId, inputValues) {
+    updateItem = (targetId, inputValues) => {
         this.setState(({tableData}) => {
             const targetIndex = tableData.findIndex((element) => element.id === targetId);
             const newTableData = [...tableData];
             Object.assign(newTableData[targetIndex], inputValues);
             return newTableData;
         });
-    }
+    };
+
 
     render() {
 
@@ -83,7 +84,7 @@ export default class App extends Component {
 
 
         return (
-            <div className="todo-app">
+            <div className="table-app">
                 <TableAddRow addItem = {this.addItem} />
 
                 <Table

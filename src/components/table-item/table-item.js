@@ -4,28 +4,22 @@ import './table-item.css';
 
 export default class TableItem extends Component {
 
-    constructor() {
-        super();
-        this.state = {
+
+        state = {
             isEditting: false,
             inputValues: {}
         };
-        this.editItem = this.editItem.bind(this);
-        this.confirm = this.confirm.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.cansel = this.cansel.bind(this);
-    }
 
-    handleChange(event) {
+    handleChange = (event) => {
         const {name, value} = event.target;
         this.setState({[name]: value});
     }
 
-    editItem() {
+    editItem = () => {
         this.setState({isEditting: true});
     }
 
-    confirm() {
+    confirm = () => {
         const id = this.props.id;
         const inputValues = Object.assign({}, this.props, this.state);
         console.log(this.props);
@@ -33,11 +27,11 @@ export default class TableItem extends Component {
         this.setState({isEditting: false});
     }
 
-    cansel() {
+    cancel = () => {
         this.setState({isEditting: false});
     }
 
-    createInput(initialValue, name, placeholder = "") {
+    createInput = (initialValue, name, placeholder = "") => {
         const value = typeof this.state[name] === "undefined" ? initialValue : this.state[name];
 
         return (
@@ -50,7 +44,7 @@ export default class TableItem extends Component {
         );
     }
 
-    createButton(onClick, type) {
+    createButton = (onClick, type) => {
         const buttonType = {
             "delete": "fa-trash-o",
             edit: "fa-pencil",
@@ -78,7 +72,7 @@ export default class TableItem extends Component {
             description = this.createInput(description, "description", "Description");
 
             buttons.push(this.createButton(this.confirm, "confirm"));
-            buttons.push(this.createButton(this.cansel, "cancel"));
+            buttons.push(this.createButton(this.cancel, "cancel"));
         } else {
             buttons.push(this.createButton(onDeleted, "delete"));
             buttons.push(this.createButton(this.editItem, "edit"));
