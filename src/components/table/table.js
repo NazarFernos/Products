@@ -3,9 +3,9 @@ import React from 'react';
 import TableItem from '../table-item/table-item';
 import './table.css';
 
-const Table = ({ todos, onDeleted, updateItem }) => {
+const Table = ({ tableItems, onDeleted, updateItem }) => {
 
-    const elements = todos.map((item) => {
+    const elements = tableItems.map((item) => {
         const { id, ...itemProps } = item;
 
         return (
@@ -13,7 +13,7 @@ const Table = ({ todos, onDeleted, updateItem }) => {
                 <TableItem {...itemProps }
                               id = {id}
                               onDeleted = {() => onDeleted(id)}
-                              updateItem = {updateItem} />
+                              updateItem = {updateItem}/>
             </div>
 
         );
@@ -21,14 +21,14 @@ const Table = ({ todos, onDeleted, updateItem }) => {
 
     return (
 
-        <div className = "table">
-            <table className="table">
-                <thead>
+        <div>
+            <table>
+                <thead className="table">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Description</th>
+                    <th className="col" scope="col">#</th>
+                    <th className="col1" scope="col">Name</th>
+                    <th className="col2" scope="col">Price</th>
+                    <th className="col3" scope="col">Description</th>
                 </tr>
                 </thead>
             </table>

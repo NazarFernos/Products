@@ -1,6 +1,22 @@
-.todo-list .list-group-item {
-  padding: .25rem .75rem;
+.table {
+  width: 750px;
+
+}
+.col {
+  width: 20px;
 }
 
+.col1 {
+  width:220px;
+  text-align: center;
+}
 
+.col2 {
+  width:100px;
+  text-align: center;
+}
 
+.col3 {
+  width:420px;
+  text-align: center;
+}

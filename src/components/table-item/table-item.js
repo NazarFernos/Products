@@ -10,14 +10,14 @@ export default class TableItem extends Component {
             isEditting: false,
             inputValues: {}
         };
-        this.editItem = this.editItem.bind(this)
-        this.confirm = this.confirm.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+        this.editItem = this.editItem.bind(this);
+        this.confirm = this.confirm.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.cansel = this.cansel.bind(this);
     }
 
     handleChange(event) {
-        const {name, value} = event.target
+        const {name, value} = event.target;
         this.setState({[name]: value});
     }
 
@@ -56,7 +56,7 @@ export default class TableItem extends Component {
             edit: "fa-pencil",
             confirm: "fa-check",
             cancel: "fa-times"
-        }
+        };
 
         return (
             <button type="button"

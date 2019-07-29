@@ -11,85 +11,85 @@ export default class App extends Component {
     maxId = 100;
 
     state = {
-        todoData: [
+        tableData: [
             {
                 id: 1,
                 label: "",
                 price: "",
                 description: ""
             }
-        ],
-        term: ""
+        ]
     };
 
-    createTodoItem(label, price, description) {
-        let todoData = this.state.todoData;
-        let lastId = todoData[todoData.length-1].id;
+    createTableItem(label, price, description) {
+        let tableData = this.state.tableData;
+        let lastId = tableData[tableData.length-1].id;
         if (lastId < this.maxId)
             return {
                 label,
                 price,
                 description,
                 id: ++lastId
-            }
+            };
 
         return false;
     }
 
     deleteItem = (id) => {
-        this.setState(({ todoData }) => {
+        this.setState(({ tableData }) => {
 
-            const idx = todoData.findIndex((el) => el.id === id);
+            const idx = tableData.findIndex((el) => el.id === id);
 
             const newArray = [
-                ...todoData.slice(0, idx),
-                ...todoData.slice(idx + 1)
+                ...tableData.slice(0, idx),
+                ...tableData.slice(idx + 1)
             ];
             return {
-                todoData: newArray
+                tableData: newArray
             };
         });
     };
 
     addItem = (text, price, description) => {
-        const newItem = this.createTodoItem(text, price, description);
+        const newItem = this.createTableItem(text, price, description);
 
-        if (!newItem) return
+        if (!newItem) return;
 
-        this.setState(({ todoData }) => {
+        this.setState(({ tableData }) => {
 
             const newArr = [
-                ...todoData,
+                ...tableData,
                 newItem
             ];
 
             return {
-                todoData: newArr
+                tableData: newArr
             };
         });
     };
 
     updateItem(targetId, inputValues) {
-        this.setState(({todoData}) => {
-            const targetIndex = todoData.findIndex((element) => element.id === targetId);
-            const newTodoData = [...todoData];
-            Object.assign(newTodoData[targetIndex], inputValues);
-            return newTodoData;
+        this.setState(({tableData}) => {
+            const targetIndex = tableData.findIndex((element) => element.id === targetId);
+            const newTableData = [...tableData];
+            Object.assign(newTableData[targetIndex], inputValues);
+            return newTableData;
         });
     }
 
     render() {
 
-        const { todoData, term } = this.state;
+        const { tableData } = this.state;
 
 
         return (
             <div className="todo-app">
                 <TableAddRow addItem = {this.addItem} />
+
                 <Table
                     onDeleted = { this.deleteItem }
                     updateItem = { this.updateItem.bind(this) }
-                    todos={todoData}/>
+                    tableItems={tableData}/>
             </div>
         );
     }
