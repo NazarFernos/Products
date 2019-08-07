@@ -5,14 +5,14 @@ import './table-add-row.css';
 export default class TableAddRow extends Component {
 
     state = {
-        label: "",
+        name: "",
         price: "",
         description: ""
     };
 
     onLabelChange = (e) => {
         this.setState({
-            label: e.target.value
+            name: e.target.value
         });
     };
 
@@ -31,9 +31,9 @@ export default class TableAddRow extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.addItem(this.state.label, this.state.price, this.state.description);
+        this.props.addItem(this.state.name, this.state.price, this.state.description);
         this.setState({
-            label: "",
+            name: "",
             price: "",
             description: ""
         });
@@ -48,17 +48,17 @@ export default class TableAddRow extends Component {
                        className="form-control"
                        onChange={this.onLabelChange}
                        placeholder="Product name"
-                       value={this.state.label}/>
-                <input type="text"
-                       className="form-control"
-                       onChange={this.onPriceChange}
-                       placeholder="Price"
-                       value={this.state.price}/>
+                       value={this.state.name}/>
                 <input type="text"
                        className="form-control"
                        onChange={this.onDescriptionChange}
                        placeholder="Description"
                        value={this.state.description}/>
+                <input type="text"
+                       className="form-control"
+                       onChange={this.onPriceChange}
+                       placeholder="Price"
+                       value={this.state.price}/>
 
                 <button
                     className="btn btn-primary">

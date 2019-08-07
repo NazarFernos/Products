@@ -1,23 +1,24 @@
-.table {
-  width: 750px;
-
-}
-.col {
+.coll {
   width: 20px;
+  text-align: center;
 }
 
 .col1 {
-  width:225px;
+  width:165px;
   text-align: center;
 }
 
 .col2 {
-  width:105px;
+  width:380px;
   text-align: center;
 }
 
 .col3 {
-  width:420px;
+  width:225px;
   text-align: center;
 }
-hdnerynyrjnermdy
+
+.col4 {
+  width: 20px;
+  text-align: center;
+}

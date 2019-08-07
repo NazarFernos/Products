@@ -22,13 +22,14 @@ const Table = ({ tableItems, onDeleted, updateItem }) => {
     return (
 
         <div>
-            <table>
+            <table className="table table-bordered">
                 <thead className="table">
                 <tr>
-                    <th className="col" scope="col">#</th>
+                    <th className="coll" scope="col">#</th>
                     <th className="col1" scope="col">Name</th>
-                    <th className="col2" scope="col">Price</th>
-                    <th className="col3" scope="col">Description</th>
+                    <th className="col2" scope="col">Description</th>
+                    <th className="col3" scope="col">Price</th>
+                    <th className="col4">Actio</th>
                 </tr>
                 </thead>
             </table>

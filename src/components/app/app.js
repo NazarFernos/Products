@@ -14,19 +14,19 @@ export default class App extends Component {
         tableData: [
             {
                 id: 1,
-                label: "",
+                name: "",
                 price: "",
                 description: ""
             }
         ]
     };
 
-    createTableItem = (label, price, description) => {
+    createTableItem = (name, price, description) => {
         let tableData = this.state.tableData;
         let lastId = tableData[tableData.length-1].id;
         if (lastId < this.maxId)
             return {
-                label,
+                name,
                 price,
                 description,
                 id: ++lastId
@@ -50,8 +50,8 @@ export default class App extends Component {
         });
     };
 
-    addItem = (text, price, description) => {
-        const newItem = this.createTableItem(text, price, description);
+    addItem = (name, price, description) => {
+        const newItem = this.createTableItem(name, price, description);
 
         if (!newItem) return;
 
@@ -66,6 +66,59 @@ export default class App extends Component {
                 tableData: newArr
             };
         });
+
+        let user = {
+            email: "user1@email.com",
+            password: "!password!"
+        };
+
+        let row = {
+            id: 1,
+            name: "Article 1",
+            description: "Article 1 Description",
+            price: 12.50,
+            status: 10
+        };
+
+        fetch('https://gentle-escarpment-19443.herokuapp.com/v1/users/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+
+            .then((res) => res.json())
+            .then(
+            data =>
+                fetch('https://gentle-escarpment-19443.herokuapp.com/v1/articles', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${data.access_token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(row)
+                })
+            )
+            .then((res) => res.json())
+            .then(
+                data =>
+                    fetch('https://gentle-escarpment-19443.herokuapp.com/v1/articles/10', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${data.access_token}`
+                        }
+                    })
+            )
+            .then((res) => res.json())
+            .then(
+                tableData => {this.setState({tableData});
+                    console.log(tableData)
+                }
+            )
+            .catch( (error) => console.log(error));
+        this.addItem();
+
     };
 
     updateItem = (targetId, inputValues) => {
@@ -77,6 +130,38 @@ export default class App extends Component {
         });
     };
 
+    componentDidMount() {
+        let user = {
+            email: "user1@email.com",
+            password: "!password!"
+        };
+
+        fetch('https://gentle-escarpment-19443.herokuapp.com/v1/users/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then((res) => res.json())
+            .then(
+                data =>
+                    fetch('https://gentle-escarpment-19443.herokuapp.com/v1/articles?page=1&updated_after=1410403761', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${data.access_token}`
+                        }
+                    })
+                )
+
+            .then((res) => res.json())
+            .then(
+                tableData => {this.setState({tableData});
+                }
+            )
+            .catch( (error) => console.log(error))
+
+    }
 
     render() {
 

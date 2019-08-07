@@ -61,12 +61,12 @@ export default class TableItem extends Component {
     };
 
     render() {
-        let { id, label, price, description, onDeleted } = this.props;
+        let { id, name, price, description, onDeleted } = this.props;
         let classNames = "table-item";
         let buttons = [];
 
         if (this.state.isEditting === true) {
-            label = this.createInput(label, "label", "Product name");
+            name = this.createInput(name, "name", "Product name");
             price = this.createInput(price, "price", "Price");
             description = this.createInput(description, "description", "Description");
 
@@ -79,14 +79,14 @@ export default class TableItem extends Component {
 
         return (
             <span className={classNames}>
-                    <table className = "table">
+                    <table className="table table-bordered">
                          <tbody>
                             <tr>
-                                <th scope="row">{id}</th>
-                                <td>{label}</td>
-                                <td>{price}</td>
-                                <td>{description}</td>
-                                {buttons}
+                                <td className="coll">{id}</td>
+                                <td className="col1">{name}</td>
+                                <td className="col2">{description}</td>
+                                <td className="col3">{price}</td>
+                                <td className="col4">{buttons}</td>
                             </tr>
                          </tbody>
                     </table>
